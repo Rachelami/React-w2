@@ -4,9 +4,6 @@ import axios from "axios";
 
 export function getData() {
     const response = axios.get(`https://5dd14f8d15bbc2001448d07d.mockapi.io/products/`);
-    // let data= response.data
-    // console.log("data:");
-    // console.log(data);
     return response
 }
 

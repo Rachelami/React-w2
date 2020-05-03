@@ -1,5 +1,4 @@
 import React from "react";
-// import * as Api from "./Api";
 import axios from "axios";
 import { getData, DeleteID, postNewId } from "../lib/Api";
 
@@ -13,7 +12,8 @@ class List extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadData();
+        this.loadData();
+        
 	}
 
 	async loadData() {
@@ -33,9 +33,12 @@ class List extends React.Component {
         const deleteuser = await DeleteID(id).then(() => { this.loadData()})
         console.log("clicked")
     }
+    
+
 
 	render() {
 		return (
+            <div>
 			<ul>
 				{this.state.loading && <span>Loading...</span>}
 				{this.state.data.map((item) => (
@@ -46,31 +49,13 @@ class List extends React.Component {
 						<button onClick={() =>this.deleteUser(item.id)}> Delete </button>
 					</li>
 				))}
-			</ul>
+			</ul></div>
 		);
 	}
 }
 
+
+
 export default List;
 
 
-
-
-
-
-// render() {
-//     return (
-//         <ul>
-//             {this.state.loading && <span>Loading...</span>}
-//             {this.state.data.map((item) => (
-//                 <li key={item.id}>
-//                     <div>Id: {item.id}</div>
-//                     <div>Name: {item.name}</div>
-//                     <img src={item.avatar}></img>
-//                     {/* <button onClick={this.deleteUser(item.id)}> Delete </button> */}
-//                 </li>
-//             ))}
-//         </ul>
-//     );
-// }
-// }
