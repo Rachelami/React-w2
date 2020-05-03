@@ -1,13 +1,15 @@
 import React from "react";
-import Api from "./Api";
+// import Api from "./Api";
+import { getData, DeleteID, postNewId } from "./lib/Api";
+import List from "./components/List";
 
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
 	return (
-		<div className="App">
-			<Api></Api>
+		<div className="App">      
+      <List></List>
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>
@@ -25,5 +27,7 @@ function App() {
 		</div>
 	);
 }
+
+getData()
 
 export default App;
