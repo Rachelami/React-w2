@@ -4,7 +4,8 @@ import { getData, DeleteID, postNewId } from "../lib/Api";
 
 class List extends React.Component {
 	constructor(props) {
-		super(props);
+        super(props);
+        // this.loadData = this.loadData.bind(this);
 		this.state = {
 			data: [],
 			loading: true,
@@ -21,12 +22,14 @@ class List extends React.Component {
 			this.setState({
 				data: response.data,
 				loading: false,
-			});
+            });
 			console.log("response.data");
 			console.log(response.data);
 		});
 		console.log("this.state.data");
 		console.log(this.state.data);
+        this.props.makeAList(this.state.data)
+        // this.props.loadData()
     }
     
     async deleteUser(id) {
@@ -37,12 +40,13 @@ class List extends React.Component {
 
 
 	render() {
+        // const { list } = props
 		return (
-            <div>
+            <div onChange={() => this.loadData()}>
 			<ul>
 				{this.state.loading && <span>Loading...</span>}
 				{this.state.data.map((item) => (
-					<li key={item.id}>
+					<li key={item.id} >
 						<div>Id: {item.id}</div>
 						<div>Name: {item.name}</div>
 						<img src={item.avatar}></img>

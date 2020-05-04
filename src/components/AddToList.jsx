@@ -6,39 +6,28 @@ class AddToList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: [],
-			formName: "",
-			formAvatar: "",
-			loading: true,
+			// data: [],
+            formAvatar: '',
+            text: ''
 		};
-	}
-
-	async loadUsers() {
-		const response = await axios.get(
-			`https://5dd14f8d15bbc2001448d07d.mockapi.io/products/`
-		);
-		this.setState({
-			data: response.data,
-			loading: false,
-		});
 	}
 
 	async handleOnSubmit(event) {
 		event.preventDefault();
-		const { formName, formAvatar } = this.state;
+		const {formAvatar } = this.state;
 		const response = await axios.post(
 			`https://5dd14f8d15bbc2001448d07d.mockapi.io/products/`,
 			{
-				name: formName,
+				name: this.state.text,
 				avatar: formAvatar,
 			}
-		);
+        );
+        this.props.handelAddToList(this.state.text)
 		console.log(response.data);
-		this.loadUsers();
 	}
 
 	render() {
-		const { formName, formAvatar, data, loading } = this.state;
+		const { formAvatar, data, loading } = this.state;
 
 		return (
 			<>
@@ -50,11 +39,11 @@ class AddToList extends React.Component {
 					<input
 						type="text"
 						name="name"
-						value={formName}
+						value={this.state.text}
 						id="name"
 						placeholder="name"
 						onChange={(event) =>
-							this.setState({ formName: event.target.value })
+							this.setState({ text: event.target.value })
 						}
 					/>
 					<input
@@ -69,17 +58,6 @@ class AddToList extends React.Component {
 					/>
 					<button type="submit">New user</button>
 				</form>
-				{loading && <span>Loading...</span>}
-				<ul>
-					{data.map((user) => (
-						<li key={user.id}>
-							<div>Id: {user.id}</div>
-							<div>Name: {user.name}</div>
-							<img src={user.avatar}></img>
-							{/* <button onClick={() =>this.deleteUser(item.id)}> Delete </button>  how to call a function from another class? */}
-						</li>
-					))}
-				</ul>
 			</>
 		);
 	}
